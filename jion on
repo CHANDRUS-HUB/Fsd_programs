@@ -1,0 +1,155 @@
+AIM:
+ To write a query to design joins.
+INTRODUCTION:
+The purpose of a join concept is to combine data spread across tables. A join is actually performed 
+by the ‘where’ clause which combines secified rows of tables. 
+Syntax:
+Select columns from table1,table2 where logical expression;
+Types of joins
+1. Simple join
+2. Self join
+3. Outer join
+Simple join:
+It is the most common type of join. It retrieves the rows from 2 tables having a common column 
+and is further classified into
+a)Equi-join
+a join , which is based on equalities, is called equi-join.
+b)Non Equi-join
+it specifies the relationships between columns belonging to different tables by making use of 
+relational operators other than ’=’ .
+Self join
+Joining of a table to itself is known as self-join.it joins one row in a tables to another. It can 
+compare each row of the table to itself and also with other rows of the same table.
+Outer join:
+It extends the result of a simple join. An outer join returns all the rows returned by simple join as 
+well as those rows from one table that do not match any row from the table. The symbol (+) represents 
+outer joins.
+JOIN OPERATION 
+SQL> create table locn(lid number(5),city varchar(10),area varchar(5),primary key(lid));
+Table created.
+SQL> desc locn;
+Name Null? Type
+----------------------------------------- -------- ----------------------------
+LID NOT NULL NUMBER(5)
+CITY VARCHAR2(10)
+AREA VARCHAR2(5)
+SQL> create table depart (dno number(5),dname varchar(10),lid number(5),primary 
+key(dno),forein key(lid) references locn(lid));
+Table created.
+SQL> desc depart;
+Name Null? Type
+----------------------------------------- -------- ----------------------------
+DNO NOT NULL NUMBER(5)
+DNAME VARCHAR2(10)
+LID NUMBER(5)
+SQL> create table emp(eid number(5),ename varchar(10),dno number(5),esal number(10),jobid 
+mgrid varchar(5),primary key(eid),foreign key(dno) references dep(dno));
+Table created.
+SQL> desc emp;
+Name Null? Type
+----------------------------------------- -------- ----------------------------
+EID NOT NULL NUMBER(5)
+ENAME VARCHAR2(10)
+DNO NUMBER(5)
+ESAL NUMBER(10)
+JOBID NUMBER(5)
+MGRID VARCHAR2(5)
+SQL> create table grade(gno number(5),ls number(8),hs number(8));
+Table created.
+SQL> desc grade;
+Name Null? Type
+----------------------------------------- -------- ----------------------------
+GNO NUMBER(5)
+LS NUMBER(8)
+HS NUMBER(8)
+Select * from depart;
+DNO DNAME LID
+-------- ---------------- -------------
+1 admin 2
+2 finance3
+3 hr 1
+4 market 3
+5 sales 1
+SQL>select * from locn;
+LID CITY AREA
+-------- -------- ------------------
+1 chennai aaa
+2 bombay bbb
+3 calcutta ccc
+SQL>select* from grade;
+GNO LS HS
+----------- ----------- ----------
+1 1000 2000
+2 2001 3000
+3 3001 4000
+4 4001 5000
+SQL>select * from emp;
+EID ENAME DNO ESAL JOBID MGRID
+------- --------------- ----------------- ------------- ------------------------- ---------------
+5 bbc 4700 2
+1 xxx 1 4000 1
+2 yyy 2 2000 2 1
+3 xxx 3 3500 2 2
+4 abc 2 4500
+EQUI-JOIN:
+SQL>select e.name,d.dname from emp e,depart d where e.dno=d.dno;
+ENAME DNAME
+------------- ---------------
+xxx admin
+yyy finance
+zzz hr
+abc finance
+NON-EQUIJOIN:
+SQL>select e.ename,e.esal,g.gno from emp e,grade where e.esal between g.ls and g.hs;
+ENAME ESAL GNO
+-------------- -------------- -------------
+bbc 4700 4
+xxx 4000 3
+yyy 2000 1
+zzz 3500 3
+abc 4500 4
+LEFTOUT-JOIN:
+SQL>select e.ename,d.dname from emp e,dep d where e.dno(+)=d.dno;
+ENAME DNAME
+---------------- -------------
+xxx admin
+yyy finance
+abc finance
+zzz hr
+market
+sales
+RIGHTOUTER-JOIN:
+SQL>select e.ename,d.dname from emp e,dep d where e.dno=(+)d.dno;
+ENAME DNAME
+---------------- -------------
+bbc
+xxx admin
+yyy finance
+zzz hr
+abc finance
+FULLOUTER –JOIN:
+SQL>select e.ename,d.dname from emp e,dep d where e.dno(+)=(+)d.dno;
+ENAME DNAME
+---------------- -------------
+bbc
+xxx admin
+yyy finance
+abc finance
+zzz hr
+market
+sales
+SELFJOIN-TO DISPLAY ENAME & THEIR MANAER NAMES:
+SQL>select e.ename,m.ename from emp e,emp m where e.mgrid=m.eid;
+ENAME ENAME
+----------------- ----------------
+bbc yyy
+yyy xxx
+zzz yyy
+SELFJOIN--- TO DISPLAY MANAGER’S SALARY FOR EVERY EMPLOYEE:
+SQL>select e.ename,m.esal from emp e,emp m where e.mgrid=m.eid;
+ENAME ESAL
+-------------- -------------
+bbc 2000
+yyy 4000
+zzz 2000
+RESULT: The above SQL commands are successfully executed
