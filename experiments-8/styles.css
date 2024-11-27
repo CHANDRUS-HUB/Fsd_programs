@@ -8,7 +8,7 @@ body {
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #4c90af;
     color: white;
     text-align: center;
     padding: 20px 0;
@@ -45,7 +45,7 @@ header {
 .card h2 {
     font-size: 18px;
     margin-bottom: 10px;
-    color: #4CAF50;
+    color: #4ca0af;
 }
 
 .card p {
