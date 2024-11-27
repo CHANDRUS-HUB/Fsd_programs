@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  .section {
+    padding: 100px 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .navbar {
+    background-color: #4CAF50;
+    color: white;
+    height: 60px;
+    line-height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0 20px;
+  }
+  
+  .navbar::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .navbar .logo {
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .navbar .nav-links {
+    float: right;
+  }
+  
+  .navbar .nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+  }
+  
+  .navbar .nav-links a:hover {
+    text-decoration: underline;
+  }
+  

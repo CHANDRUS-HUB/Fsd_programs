@@ -1,0 +1,64 @@
+// Variables
+$primary-color: #4CAF50;
+$text-color: #333;
+$background-color: #f4f4f4;
+$nav-height: 60px;
+
+// Mixins
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+// Base Styles
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: $background-color;
+    color: $text-color;
+}
+
+.section {
+    padding: 100px 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+// Navbar Styles
+.navbar {
+    background-color: $primary-color;
+    color: white;
+    height: $nav-height;
+    line-height: $nav-height;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0 20px;
+
+    @include clearfix;
+
+    .logo {
+        float: left;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        float: right;
+
+        a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
